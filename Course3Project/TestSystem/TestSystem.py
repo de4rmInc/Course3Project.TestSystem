@@ -3,9 +3,8 @@ import io
 import ast
 import re
 import inspect
-
-predefined_vars = ['e1','e2','e3','e4','e5','e6','e7','e8']
-
+import importlib.machinery
+import os.path
 
 testvars = vars(ex1).copy()
 module_lines = list(open('exercise_one.py'))
@@ -37,17 +36,8 @@ def verify_function(args, func1, func2):
         equivalent = equivalent and result1 == result2
         if not equivalent: return equivalent
     return equivalent
-a = 0
 
-def test_variables(variables):
-    for v in predefined_vars:
-        print(variables[v])
-        a = variables[v]
-        print(type(a))
-    for x in [1,2,3]:
-        print(variables['e7'](x))
-
-def run_tests(tests={}):
+def run_tests(tests={},testvars={},module_lines=[]):
     variables = sorted(tests.keys())
     for v in variables:
         print('tests for variable %s:' % v)
@@ -90,14 +80,23 @@ def e7_testfunction(a):
 #END>>>Section for predefined test functions
 ###
 predefined_tests = \
-    {'e1':[(['%','/'],find_line), ([0],e1_testfunction)],
-     'e2':[(['ingstr','ing','ingstr'],find_line)],
-     'e3':[([[1,2,3,4,5]],e3_testfunction)],
-     'e4':[([],None)],
-     'e5':[([0],e5_testfunction), (['e1','e2'],find_line)],
-     'e6':[(['math','log'],find_line)],
-     'e7':[([1,2,3,4],e7_testfunction)],
-     'e8':[([],None)]
+    {'exercise1':[(['%','/'],find_line), ([0],e1_testfunction)],
+     'exercise2':[(['ingstr','ing','ingstr'],find_line)],
+     'exercise3':[([[1,2,3,4,5]],e3_testfunction)],
+     'exercise4':[([],None)],
+     'exercise5':[([0],e5_testfunction), (['exercise1','exercise2'],find_line)],
+     'exercise6':[(['math','log'],find_line)],
+     'exercise7':[([1,2,3,4],e7_testfunction)],
+     'exercise8':[([],None)]
      }
 
-run_tests(predefined_tests)
+path = input('Enter full path to file with exercises: ')
+
+if(len(path) and path.endswith('.py') and os.path.exists(path)):
+    dynamic_module_lines = list(open(path))
+    loader = importlib.machinery.SourceFileLoader('exerci5e5._exerci5e_',path)
+    dynamic_loaded_module = loader.load_module('exerci5e5._exerci5e_')
+    dynamic_module_vars = vars(dynamic_loaded_module).copy()
+
+    run_tests(predefined_tests, dynamic_module_vars, dynamic_module_lines)
+    
