@@ -22,7 +22,6 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="course_project%28fake%29.py" />
     <Compile Include="exercise_one.py" />
     <Compile Include="python_lab.py" />
     <Compile Include="submit_python_lab.py" />
