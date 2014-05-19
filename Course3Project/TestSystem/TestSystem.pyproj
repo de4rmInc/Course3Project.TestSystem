@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>5656b681-0185-426b-9c2d-c93ec48cd57e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>TestSystem.py</StartupFile>
+    <StartupFile>compile.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="compile.py" />
     <Compile Include="exercise_one.py" />
     <Compile Include="python_lab.py" />
     <Compile Include="submit_python_lab.py" />

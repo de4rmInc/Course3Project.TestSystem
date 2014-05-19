@@ -90,15 +90,17 @@ predefined_tests = \
      'exercise8':[([],None)]
      }
 
-path = input('Enter full path to file with exercises: ')
+if __name__ == '__main__':
 
-if(len(path) and path.endswith('.py') and os.path.exists(path)):
-    dynamic_module_lines = list(open(path))
-    loader = importlib.machinery.SourceFileLoader('exerci5e5._exerci5e_',path)
-    dynamic_loaded_module = loader.load_module('exerci5e5._exerci5e_')
-    dynamic_module_vars = vars(dynamic_loaded_module).copy()
+    path = input('Enter full path to file with exercises: ')
 
-    run_tests(predefined_tests, dynamic_module_vars, dynamic_module_lines)
-else:
-    print('Check file path and run application again')
+    if(len(path) and path.endswith('.py') and os.path.exists(path)):
+        dynamic_module_lines = list(open(path))
+        loader = importlib.machinery.SourceFileLoader('exerci5e5._exerci5e_',path)
+        dynamic_loaded_module = loader.load_module('exerci5e5._exerci5e_')
+        dynamic_module_vars = vars(dynamic_loaded_module).copy()
+
+        run_tests(predefined_tests, dynamic_module_vars, dynamic_module_lines)
+    else:
+        print('Check file path and run application again')
     
