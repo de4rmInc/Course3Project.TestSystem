@@ -3,15 +3,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>5656b681-0185-426b-9c2d-c93ec48cd57e</ProjectGuid>
+    <ProjectGuid>7cb860f5-f316-4256-ae8e-1b017bd5c9bf</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>TestModuleLib.py</StartupFile>
+    <StartupFile>TestModule.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>TestSystem</Name>
-    <RootNamespace>TestSystem</RootNamespace>
+    <Name>TestModule</Name>
+    <RootNamespace>TestModule</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,11 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="compile.py" />
-    <Compile Include="exercise_one.py" />
-    <Compile Include="python_lab.py" />
-    <Compile Include="submit_python_lab.py" />
-    <Compile Include="TestModuleLib.py" />
+    <Compile Include="TestModule.py" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>

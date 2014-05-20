@@ -2,4 +2,10 @@ from distutils.core import setup
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
 
-print("aa")
+ext_modules = [Extension('TestModuleLib', ['TestModuleLib.py'])]
+
+setup(
+      name = 'Test Module Library',
+      cmdclass = {'build_ext': build_ext},
+      ext_modules = ext_modules
+)

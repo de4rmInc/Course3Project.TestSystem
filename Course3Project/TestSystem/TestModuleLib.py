@@ -1,13 +1,9 @@
-import exercise_one as ex1
 import io
 import ast
 import re
 import inspect
 import importlib.machinery
 import os.path
-
-testvars = vars(ex1).copy()
-module_lines = list(open('exercise_one.py'))
 
 def find_lines(lines, pattern=''):
     strings = list(filter(lambda l: pattern in l,lines))
@@ -37,10 +33,14 @@ def verify_function(args, func1, func2):
         if not equivalent: return equivalent
     return equivalent
 
+def print_result(func_name, result):
+    print('Test %s have completed successfully.' % func_name if result else 'Test %s have failed.' % func_name)
+
 def run_tests(tests={},testvars={},module_lines=[]):
     variables = sorted(tests.keys())
+    temp_result = False
     for v in variables:
-        print('tests for variable %s:' % v)
+        print('\nTests for variable %s:' % v)
         good_job = True
         testvar = testvars[v]
         for test in tests[v]:            
@@ -49,18 +49,26 @@ def run_tests(tests={},testvars={},module_lines=[]):
             
             if(testfunc != None and len(testfuncargs)):
                 if(isFunction(testvar)):
-                    good_job = good_job and verify_function(testfuncargs,testvar,testfunc)
+                    temp_result = verify_function(testfuncargs,testvar,testfunc)
+                    print_result(testfunc.__name__, temp_result)
+                    good_job = good_job and temp_result
                 elif testfunc.__name__ == 'find_line':
                     for funcarg in testfuncargs:
                         print('%s(\'%s\')\t\t' % (testfunc.__name__,funcarg))
-                        good_job = good_job and testfunc(find_lines(module_lines,v),funcarg) != None
+                        temp_result = testfunc(find_lines(module_lines,v),funcarg) != None
+                        print_result(testfunc.__name__, temp_result)
+                        good_job = good_job and temp_result
                 elif len(inspect.getfullargspec(testfunc)[0]) == 2:
                     for funcarg in testfuncargs:
-                        good_job = good_job and testfunc(funcarg,testvar)
+                        temp_result = testfunc(funcarg,testvar)
+                        print_result(testfunc.__name__, temp_result)
+                        good_job = good_job and temp_result
                 else:
-                    good_job = good_job and testfunc(testvar)
+                    temp_result = testfunc(testvar)
+                    print_result(testfunc.__name__, temp_result)
+                    good_job = good_job and temp_result
                 
-        print('All tests completed successfully.' if good_job else 'Try next time, please. Fix errors.')
+        print('All tests have completed successfully.' if good_job else 'Try next time, please. Fix errors.')
                         
 ###
 #START>>>Section for predefined test functions
@@ -90,8 +98,7 @@ predefined_tests = \
      'exercise8':[([],None)]
      }
 
-if __name__ == '__main__':
-
+def start_app():
     path = input('Enter full path to file with exercises: ')
 
     if(len(path) and path.endswith('.py') and os.path.exists(path)):
@@ -103,4 +110,3 @@ if __name__ == '__main__':
         run_tests(predefined_tests, dynamic_module_vars, dynamic_module_lines)
     else:
         print('Check file path and run application again')
-    
