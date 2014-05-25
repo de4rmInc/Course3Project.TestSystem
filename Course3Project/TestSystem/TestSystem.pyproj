@@ -26,7 +26,14 @@
     <Compile Include="exercise_one.py" />
     <Compile Include="python_lab.py" />
     <Compile Include="submit_python_lab.py" />
+    <Compile Include="task1\compile.py" />
+    <Compile Include="task1\task1.py" />
+    <Compile Include="task1\task1_test.py" />
+    <Compile Include="task1\__init__.py" />
     <Compile Include="TestModuleLib.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="task1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>

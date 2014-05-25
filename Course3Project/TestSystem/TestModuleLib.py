@@ -110,3 +110,24 @@ def start_app():
         run_tests(predefined_tests, dynamic_module_vars, dynamic_module_lines)
     else:
         print('Check file path and run application again')
+
+#def start_test():
+#    name = input('Enter name of task you want to test')
+
+#    task_name = name + '\\' + name + '.py'
+#    test_name = name + '\\' + name + '_test.py'
+
+#    if(os.path.exists(task_name) and os.path.exists(test_name)):
+#        dynamic_task_module_lines = list(open(task_name))
+#        loader = importlib.machinery.SourceFileLoader(task_name + 'exerci5e5._exerci5e_', task_name)
+#        dynamic_loaded_module = loader.load_module(task_name + 'exerci5e5._exerci5e_')
+#        dynamic_module_vars = vars(dynamic_loaded_module).copy()
+
+#        #loader = importlib.machinery.SourcelessFileLoader(test_name + 'exerci5e5._exerci5e_', test_name)#SourcelessFileLoader
+#        #dynamic_test_loaded_module = loader.load_module(test_name + 'exerci5e5._exerci5e_')
+        
+#        run_tests(dynamic_loaded_module.tests, dynamic_module_vars, dynamic_task_module_lines)
+#    else:
+#        print('Check file path and run application again')
+
+#start_test()
