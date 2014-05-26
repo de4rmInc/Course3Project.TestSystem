@@ -30,10 +30,15 @@
     <Compile Include="task1\task1.py" />
     <Compile Include="task1\task1_test.py" />
     <Compile Include="task1\__init__.py" />
+    <Compile Include="task2\compile.py" />
+    <Compile Include="task2\task2.py" />
+    <Compile Include="task2\task2_test.py" />
+    <Compile Include="task2\__init__.py" />
     <Compile Include="TestModuleLib.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="task1\" />
+    <Folder Include="task2\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>

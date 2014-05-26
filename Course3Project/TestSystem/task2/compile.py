@@ -2,7 +2,7 @@ from distutils.core import setup
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
 
-ext_modules = [Extension('_task1_test', ['task1_test.py'])]
+ext_modules = [Extension('task2_test_pyd', ['task2_test.py'])]
 
 setup(
       name = 'Test Module Library',

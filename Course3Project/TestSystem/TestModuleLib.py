@@ -27,8 +27,8 @@ def isFunction(obj):
 def verify_function(args, func1, func2):
     equivalent = True
     for arg in args:
-        result1 = func1(arg)
-        result2 = func2(arg)
+        result1 = func1(*arg)
+        result2 = func2(*arg)
         equivalent = equivalent and result1 == result2
         if not equivalent: return equivalent
     return equivalent
@@ -49,9 +49,10 @@ def run_tests(tests={},testvars={},module_lines=[]):
             
             if(testfunc != None and len(testfuncargs)):
                 if(isFunction(testvar)):
-                    temp_result = verify_function(testfuncargs,testvar,testfunc)
-                    print_result(testfunc.__name__, temp_result)
-                    good_job = good_job and temp_result
+                    for testfuncarg in testfuncargs:
+                        temp_result = verify_function(testfuncargs,testvar,testfunc)
+                        print_result(testfunc.__name__, temp_result)
+                        good_job = good_job and temp_result
                 elif testfunc.__name__ == 'find_line':
                     for funcarg in testfuncargs:
                         print('%s(\'%s\')\t\t' % (testfunc.__name__,funcarg))
@@ -70,64 +71,38 @@ def run_tests(tests={},testvars={},module_lines=[]):
                 
         print('All tests have completed successfully.' if good_job else 'Try next time, please. Fix errors.')
                         
-###
-#START>>>Section for predefined test functions
-###
-def e1_testfunction(obj):
-    return obj > 10
 
-def e3_testfunction(o1,o2):
-    return True if o1 == o2 else None
+#def start_app():
+#    path = input('Enter full path to file with exercises: ')
 
-def e5_testfunction(o1):
-    return type(o1) is tuple
-
-def e7_testfunction(a):
-    return a * a
-###
-#END>>>Section for predefined test functions
-###
-predefined_tests = \
-    {'exercise1':[(['%','/'],find_line), ([0],e1_testfunction)],
-     'exercise2':[(['ingstr','ing','ingstr'],find_line)],
-     'exercise3':[([[1,2,3,4,5]],e3_testfunction)],
-     'exercise4':[([],None)],
-     'exercise5':[([0],e5_testfunction), (['exercise1','exercise2'],find_line)],
-     'exercise6':[(['math','log'],find_line)],
-     'exercise7':[([1,2,3,4],e7_testfunction)],
-     'exercise8':[([],None)]
-     }
-
-def start_app():
-    path = input('Enter full path to file with exercises: ')
-
-    if(len(path) and path.endswith('.py') and os.path.exists(path)):
-        dynamic_module_lines = list(open(path))
-        loader = importlib.machinery.SourceFileLoader('exerci5e5._exerci5e_',path)
-        dynamic_loaded_module = loader.load_module('exerci5e5._exerci5e_')
-        dynamic_module_vars = vars(dynamic_loaded_module).copy()
-
-        run_tests(predefined_tests, dynamic_module_vars, dynamic_module_lines)
-    else:
-        print('Check file path and run application again')
-
-#def start_test():
-#    name = input('Enter name of task you want to test')
-
-#    task_name = name + '\\' + name + '.py'
-#    test_name = name + '\\' + name + '_test.py'
-
-#    if(os.path.exists(task_name) and os.path.exists(test_name)):
-#        dynamic_task_module_lines = list(open(task_name))
-#        loader = importlib.machinery.SourceFileLoader(task_name + 'exerci5e5._exerci5e_', task_name)
-#        dynamic_loaded_module = loader.load_module(task_name + 'exerci5e5._exerci5e_')
+#    if(len(path) and path.endswith('.py') and os.path.exists(path)):
+#        dynamic_module_lines = list(open(path))
+#        loader = importlib.machinery.SourceFileLoader('exerci5e5._exerci5e_',path)
+#        dynamic_loaded_module = loader.load_module('exerci5e5._exerci5e_')
 #        dynamic_module_vars = vars(dynamic_loaded_module).copy()
 
-#        #loader = importlib.machinery.SourcelessFileLoader(test_name + 'exerci5e5._exerci5e_', test_name)#SourcelessFileLoader
-#        #dynamic_test_loaded_module = loader.load_module(test_name + 'exerci5e5._exerci5e_')
-        
-#        run_tests(dynamic_loaded_module.tests, dynamic_module_vars, dynamic_task_module_lines)
+#        run_tests(predefined_tests, dynamic_module_vars, dynamic_module_lines)
 #    else:
 #        print('Check file path and run application again')
 
-#start_test()
+def start_tests():
+    name = input('Enter name of task(s) you want to test: ')
+
+    dirs = [d for d in os.listdir() if os.path.isdir(d) and name in d]
+    for dir_name in dirs:
+        task_name = dir_name + '\\' + dir_name + '.py'
+        test_name = dir_name + '\\' + dir_name + '_test_pyd.pyd'
+    
+        if(os.path.exists(task_name) and os.path.exists(test_name)):
+            dynamic_task_module_lines = list(open(task_name))
+            loader = importlib.machinery.SourceFileLoader(task_name + 'exerci5e5._exerci5e_', task_name)
+            dynamic_loaded_module = loader.load_module(task_name + 'exerci5e5._exerci5e_')
+            dynamic_module_vars = vars(dynamic_loaded_module).copy()
+
+            #loader = importlib.machinery.ExtensionFileLoader(test_name, test_name)#SourcelessFileLoader
+            #dynamic_test_loaded_module = loader.load_module(test_name)
+            print("\n======  TEST FOR %s IS RUNNING NOW  ======"%dir_name)
+            run_tests(dynamic_loaded_module.tests, dynamic_module_vars, dynamic_task_module_lines)
+            print("\n======  TEST FOR %s HAS JUST BEEN ENDED  ======\n"%dir_name)
+        else:
+            print('Check file path and run application again')

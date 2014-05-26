@@ -1,8 +1,4 @@
 import math
-from task1 \
-import task1_test_pyd
-
-tests = task1_test_pyd.predefined_tests
 
 exercise1 = 23 % 6 + 6 / 2
 exercise2 = 'string'

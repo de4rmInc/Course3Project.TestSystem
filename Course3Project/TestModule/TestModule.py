@@ -1,5 +1,4 @@
 import TestModuleLib as tml
 
-
-if __name__ == '__main__':
-    tml.start_app()
+def start_tests():
+	tml.start_tests()
