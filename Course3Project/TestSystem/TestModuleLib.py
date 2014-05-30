@@ -4,6 +4,7 @@ import re
 import inspect
 import importlib.machinery
 import os.path
+from common_tools import tools
 
 def find_lines(lines, pattern=''):
     strings = list(filter(lambda l: pattern in l,lines))
@@ -44,8 +45,8 @@ def run_tests(tests={},testvars={},module_lines=[]):
         good_job = True
         testvar = testvars[v]
         for test in tests[v]:            
-            testfuncargs = test[0]
-            testfunc = test[1]
+            testfuncargs = test.params
+            testfunc = test.func
             
             if(testfunc != None and len(testfuncargs)):
                 if(isFunction(testvar)):
@@ -106,3 +107,4 @@ def start_tests():
             print("\n======  TEST FOR %s HAS JUST BEEN ENDED  ======\n"%dir_name)
         else:
             print('Check file path and run application again')
+start_tests()

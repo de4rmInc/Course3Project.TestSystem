@@ -1,3 +1,5 @@
+from common_tools import tools
+
 def find_line(lines, pattern=''):
     elem = list(filter(lambda l:pattern in l,lines))
     return elem[0] if len(elem) else None
@@ -19,17 +21,27 @@ def __e7_testfunction__(a):
 #END>>>Section for predefined test functions
 ###
 
-def __PyInit_pyd__():
-    import task1 as t1
-    return t1
-
 predefined_tests = \
-    {'exercise1':[(['%','/'],find_line), ([0],__e1_testfunction__)],
-     'exercise2':[(['ingstr','ing','ingstr'],find_line)],
-     'exercise3':[([[1,2,3,4,5]],__e3_testfunction__)],
-     'exercise4':[([],None)],
-     'exercise5':[([[0]],__e5_testfunction__), (['exercise1','exercise2'],find_line)],
-     'exercise6':[(['math','log'],find_line)],
-     'exercise7':[([[1],[2],[3],[4]],__e7_testfunction__)],
-     'exercise8':[([],None)]
+    {'exercise1':[
+                  tools.Test( find_line, ['%','/']),
+                  tools.Test(__e1_testfunction__, [0])
+                  ],
+     'exercise2':[
+                  tools.Test(find_line, ['ingstr','ing','ingstr'])
+                  ],
+     'exercise3':[
+                  tools.Test(__e3_testfunction__, [[1,2,3,4,5]])
+                  ],
+     'exercise4':[tools.Test()],
+     'exercise5':[
+                  tools.Test(__e5_testfunction__,[[0]]),
+                  tools.Test(find_line, ['exercise1','exercise2'])
+                  ],
+     'exercise6':[
+                  tools.Test(find_line, ['math','log'])
+                  ],
+     'exercise7':[
+                  tools.Test(__e7_testfunction__, [[1],[2],[3],[4]])
+                  ],
+     'exercise8':[tools.Test()]
      }
