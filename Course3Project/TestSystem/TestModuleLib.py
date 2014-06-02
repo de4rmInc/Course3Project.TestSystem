@@ -44,8 +44,8 @@ def run_tests(tests={},testvars={},module_lines=[]):
         good_job = True
         testvar = testvars[v]
         for test in tests[v]:            
-            testfuncargs = test[0]
-            testfunc = test[1]
+            testfuncargs = test.params
+            testfunc = test.func
             
             if(testfunc != None and len(testfuncargs)):
                 if(isFunction(testvar)):
@@ -71,27 +71,13 @@ def run_tests(tests={},testvars={},module_lines=[]):
                 
         print('All tests have completed successfully.' if good_job else 'Try next time, please. Fix errors.')
                         
-
-#def start_app():
-#    path = input('Enter full path to file with exercises: ')
-
-#    if(len(path) and path.endswith('.py') and os.path.exists(path)):
-#        dynamic_module_lines = list(open(path))
-#        loader = importlib.machinery.SourceFileLoader('exerci5e5._exerci5e_',path)
-#        dynamic_loaded_module = loader.load_module('exerci5e5._exerci5e_')
-#        dynamic_module_vars = vars(dynamic_loaded_module).copy()
-
-#        run_tests(predefined_tests, dynamic_module_vars, dynamic_module_lines)
-#    else:
-#        print('Check file path and run application again')
-
 def start_tests():
     name = input('Enter name of task(s) you want to test: ')
 
     dirs = [d for d in os.listdir() if os.path.isdir(d) and name in d]
     for dir_name in dirs:
         task_name = dir_name + '\\' + dir_name + '.py'
-        test_name = dir_name + '\\' + dir_name + '_test_pyd.pyd'
+        test_name = dir_name + '\\' + dir_name + '_test.pyd'
     
         if(os.path.exists(task_name) and os.path.exists(test_name)):
             dynamic_task_module_lines = list(open(task_name))

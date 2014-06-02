@@ -1,3 +1,5 @@
+from common_tools import tools
+
 def find_line(lines, pattern=''):
     elem = list(filter(lambda l:pattern in l,lines))
     return elem[0] if len(elem) else None
@@ -90,20 +92,38 @@ def myUnion(L):
 #END>>>Section for predefined test functions
 ###5+3j, 1j, -1+0.001j, .001+9j
 
+#predefined_tests = \
+#    {'exercise1':[([[[1,2,3,4],4],[[70,80],4]],myFilter)],
+#     'exercise2':[([[[1,0,0,0]]],myLists)],
+#     'exercise3':[([],None)],
+#     'complex_addition_a':[([5+3j],equality)],
+#     'complex_addition_b':[([1j],equality)],
+#     'complex_addition_c':[([-1+0.001j],equality)],
+#     'complex_addition_d':[([.001+9j],equality)],
+#     'GF2_sum_1':[([1],equality)],
+#     'GF2_sum_2':[([0],equality)],
+#     'GF2_sum_3':[([0],equality)],
+#     'exercise6':[([],None)],
+#     'exercise7':[([],None)],
+#     'exercise8':[([],None)],
+#     'exercise9':[([],None)],
+#     'exercise10':[([],None)],
+#     }
+
 predefined_tests = \
-    {'exercise1':[([[[1,2,3,4],4],[[70,80],4]],myFilter)],
-     'exercise2':[([[[1,0,0,0]]],myLists)],
-     'exercise3':[([],None)],
-     'complex_addition_a':[([5+3j],equality)],
-     'complex_addition_b':[([1j],equality)],
-     'complex_addition_c':[([-1+0.001j],equality)],
-     'complex_addition_d':[([.001+9j],equality)],
-     'GF2_sum_1':[([1],equality)],
-     'GF2_sum_2':[([0],equality)],
-     'GF2_sum_3':[([0],equality)],
-     'exercise6':[([],None)],
-     'exercise7':[([],None)],
-     'exercise8':[([],None)],
-     'exercise9':[([],None)],
-     'exercise10':[([],None)],
+    {'exercise1':[tools.Test(myFilter, [ [[1,2,3,4],4], [[70,80],4] ])],
+     'exercise2':[tools.Test(myLists, [ [[1,0,0,0]] ])],
+     'exercise3':[tools.Test()],
+     'complex_addition_a':[tools.Test(equality, [5+3j])],
+     'complex_addition_b':[tools.Test(equality, [1j])],
+     'complex_addition_c':[tools.Test(equality, [-1+0.001j])],
+     'complex_addition_d':[tools.Test(equality, [.001+9j])],
+     'GF2_sum_1':[tools.Test(equality, [1])],
+     'GF2_sum_2':[([0], equality)],
+     'GF2_sum_3':[([0], equality)],
+     'exercise6':[tools.Test()],
+     'exercise7':[tools.Test()],
+     'exercise8':[tools.Test()],
+     'exercise9':[tools.Test()],
+     'exercise10':[tools.Test()],
      }
