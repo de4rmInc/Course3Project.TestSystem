@@ -156,7 +156,6 @@ $RECYCLE.BIN/
 .DS_Store
 
 #Custome files
-python_lab.py
-submit_python_lab.py
-/python_lab.py
-/submit_python_lab.py
+*.pyc
+*.pyd
+__pycache__/

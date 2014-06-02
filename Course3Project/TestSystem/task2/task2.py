@@ -1,7 +1,7 @@
 from task2 \
-import task2_test_pyd
+import task2_test
 
-tests = task2_test_pyd.predefined_tests
+tests = task2_test.predefined_tests
 
 def myFilter(L, num):
     return [x for x in L if x % num != 0]
