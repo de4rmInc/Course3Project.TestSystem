@@ -110,17 +110,36 @@ def myUnion(L):
 #     'exercise10':[([],None)],
 #     }
 
+###  TESTS  ###
+
+exercise1Test1 = tools.Test('my Filter test', myFilter, [ [[1,2,3,4],4], [[70,80],4] ])
+exercise1Test1.answer.OK = 'Filtered data is correct'
+exercise1Test1.answer.Fail = 'Filtered data is incorrect'
+
+exercise2Test1 = tools.Test('my List test', myLists, [ [[1,0,0,0]] ])
+exercise2Test1.answer.OK = 'List data is correct'
+exercise2Test1.answer.Fail = 'List data is incorrect'
+
+complex_addition_aTest1 = tools.Test('equality', equality, [5+3j])
+
+complex_addition_bTest1 = tools.Test('equality', equality, [1j])
+
+complex_addition_cTest1 = tools.Test('equality', equality, [-1+0.001j])
+complex_addition_cTest2 = tools.Test('Find line test', find_line, ['+','-','j'])
+
+complex_addition_dTest1 = tools.Test('equality', equality, [.001+9j])
+
 predefined_tests = \
-    {'exercise1':[tools.Test(myFilter, [ [[1,2,3,4],4], [[70,80],4] ])],
-     'exercise2':[tools.Test(myLists, [ [[1,0,0,0]] ])],
+    {'exercise1':[exercise1Test1],
+     'exercise2':[exercise2Test1],
      'exercise3':[tools.Test()],
-     'complex_addition_a':[tools.Test(equality, [5+3j])],
-     'complex_addition_b':[tools.Test(equality, [1j])],
-     'complex_addition_c':[tools.Test(equality, [-1+0.001j])],
-     'complex_addition_d':[tools.Test(equality, [.001+9j])],
-     'GF2_sum_1':[tools.Test(equality, [1])],
-     'GF2_sum_2':[([0], equality)],
-     'GF2_sum_3':[([0], equality)],
+     'complex_addition_a':[complex_addition_aTest1],
+     'complex_addition_b':[complex_addition_bTest1],
+     'complex_addition_c':[complex_addition_cTest1, complex_addition_cTest2],
+     'complex_addition_d':[complex_addition_dTest1],
+     'GF2_sum_1':[tools.Test('equality', equality, [1])],
+     'GF2_sum_2':[tools.Test('equality', equality, [0])],
+     'GF2_sum_3':[tools.Test('equality', equality, [0])],
      'exercise6':[tools.Test()],
      'exercise7':[tools.Test()],
      'exercise8':[tools.Test()],

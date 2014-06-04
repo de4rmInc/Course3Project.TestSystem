@@ -4,6 +4,7 @@ import re
 import inspect
 import importlib.machinery
 import os.path
+from common_tools import tools
 
 def find_lines(lines, pattern=''):
     strings = list(filter(lambda l: pattern in l,lines))
@@ -37,41 +38,52 @@ def print_result(func_name, result):
     print('Test %s have completed successfully.' % func_name if result else 'Test %s have failed.' % func_name)
 
 def run_tests(tests={},testvars={},module_lines=[]):
+    response = {}
     variables = sorted(tests.keys())
     temp_result = False
     for v in variables:
         print('\nTests for variable %s:' % v)
         good_job = True
         testvar = testvars[v]
+        response[v]={}
         for test in tests[v]:            
             testfuncargs = test.params
             testfunc = test.func
-            
+
             if(testfunc != None and len(testfuncargs)):
                 if(isFunction(testvar)):
                     for testfuncarg in testfuncargs:
                         temp_result = verify_function(testfuncargs,testvar,testfunc)
                         print_result(testfunc.__name__, temp_result)
+
+                        response[v][test.testName] = test.answer.OK if temp_result else test.answer.Fail
+
                         good_job = good_job and temp_result
                 elif testfunc.__name__ == 'find_line':
                     for funcarg in testfuncargs:
                         print('%s(\'%s\')\t\t' % (testfunc.__name__,funcarg))
                         temp_result = testfunc(find_lines(module_lines,v),funcarg) != None
                         print_result(testfunc.__name__, temp_result)
+                        response[v][test.testName] = test.answer.OK if temp_result else test.answer.Fail
                         good_job = good_job and temp_result
                 elif len(inspect.getfullargspec(testfunc)[0]) == 2:
                     for funcarg in testfuncargs:
                         temp_result = testfunc(funcarg,testvar)
                         print_result(testfunc.__name__, temp_result)
+                        response[v][test.testName] = test.answer.OK if temp_result else test.answer.Fail
                         good_job = good_job and temp_result
                 else:
                     temp_result = testfunc(testvar)
                     print_result(testfunc.__name__, temp_result)
+                    response[v][test.testName] = test.answer.OK if temp_result else test.answer.Fail
                     good_job = good_job and temp_result
                 
-        print('All tests have completed successfully.' if good_job else 'Try next time, please. Fix errors.')
-                        
+        print('All tests have been completed successfully.' if good_job else 'Some tests have been failed. Fix errors and try later.')
+
+    return response
+
 def start_tests():
+    responses = {}
     name = input('Enter name of task(s) you want to test: ')
 
     dirs = [d for d in os.listdir() if os.path.isdir(d) and name in d]
@@ -88,7 +100,11 @@ def start_tests():
             #loader = importlib.machinery.ExtensionFileLoader(test_name, test_name)#SourcelessFileLoader
             #dynamic_test_loaded_module = loader.load_module(test_name)
             print("\n======  TEST FOR %s IS RUNNING NOW  ======"%dir_name)
-            run_tests(dynamic_loaded_module.tests, dynamic_module_vars, dynamic_task_module_lines)
+
+            responses[dir_name] = run_tests(dynamic_loaded_module.tests, dynamic_module_vars, dynamic_task_module_lines)
+
             print("\n======  TEST FOR %s HAS JUST BEEN ENDED  ======\n"%dir_name)
         else:
             print('Check file path and run application again')
+
+    return responses

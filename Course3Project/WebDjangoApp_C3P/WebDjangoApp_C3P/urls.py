@@ -5,7 +5,8 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-                       url(r'^$','WebDjangoApp_C3P.C3P_WebApp.views.home', name = 'home')
+                       url(r'^$','WebDjangoApp_C3P.C3P_WebApp.views.home', name = 'home'),
+                       url(r'^', include('C3P_WebApp.urls', namespace = 'C3P_WebApp')),
     # Examples:
     # url(r'^$', 'WebDjangoApp_C3P.views.home', name='home'),
     # url(r'^WebDjangoApp_C3P/', include('WebDjangoApp_C3P.WebDjangoApp_C3P.urls')),
@@ -14,5 +15,5 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+        url(r'^admin/', include(admin.site.urls)),
 )

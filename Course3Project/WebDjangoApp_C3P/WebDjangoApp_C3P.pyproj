@@ -31,6 +31,7 @@
     <Compile Include="manage.py" />
     <Compile Include="WebDjangoApp_C3P\C3P_WebApp\models.py" />
     <Compile Include="WebDjangoApp_C3P\C3P_WebApp\tests.py" />
+    <Compile Include="WebDjangoApp_C3P\C3P_WebApp\urls.py" />
     <Compile Include="WebDjangoApp_C3P\C3P_WebApp\views.py" />
     <Compile Include="WebDjangoApp_C3P\C3P_WebApp\__init__.py" />
     <Compile Include="WebDjangoApp_C3P\__init__.py" />
@@ -54,8 +55,10 @@
     <Folder Include="WebDjangoApp_C3P\" />
     <Folder Include="WebDjangoApp_C3P\C3P_WebApp\" />
     <Folder Include="WebDjangoApp_C3P\C3P_WebApp\templates\" />
+    <Folder Include="WebDjangoApp_C3P\C3P_WebApp\templates\C3P_WebApp\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="WebDjangoApp_C3P\C3P_WebApp\templates\C3P_WebApp\index.html" />
     <Content Include="WebDjangoApp_C3P\C3P_WebApp\templates\index.html" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Python Tools\Microsoft.PythonTools.Django.targets" />
