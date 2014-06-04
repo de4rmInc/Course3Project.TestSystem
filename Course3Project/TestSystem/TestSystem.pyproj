@@ -26,14 +26,9 @@
     <Compile Include="common_tools\__init__.py" />
     <Compile Include="compile.py" />
     <Compile Include="exercise_one.py" />
-    <Compile Include="python_lab.py" />
-    <Compile Include="submit_python_lab.py" />
-    <Compile Include="task1\compile.py" />
     <Compile Include="task1\task1.py" />
     <Compile Include="task1\task1_test.py" />
-    <Compile Include="task1\_test.py" />
     <Compile Include="task1\__init__.py" />
-    <Compile Include="task2\compile.py" />
     <Compile Include="task2\task2.py" />
     <Compile Include="task2\task2_test.py" />
     <Compile Include="task2\__init__.py" />
